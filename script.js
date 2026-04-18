@@ -11,8 +11,9 @@ completeSectionCon.innerHTML = ` <span>Conpleted</span>
 addButton.addEventListener("click", () => {
    let ul = document.createElement("ul");
    ul.classList.add("oneTask")
-   ul.innerHTML = `<div class="checkboxCon">
-   
+   ul.innerHTML = `
+
+   <div class="checkboxCon">
    <input type="checkbox" name="cd" id="cd" class="checkbox" >
    <label for="cd" > </label>
    </div>
@@ -27,10 +28,41 @@ addButton.addEventListener("click", () => {
 
    addSection.prepend(ul)
 
+
    let deleteBtn = ul.querySelector(".delete")
    deleteBtn.addEventListener("click", () => {
-      ul.classList.add("remove")
-   })
+      if (document.querySelector(".cdcc")) {
+         document.querySelector(".cdcc").classList.remove("remove")
+         return
+      }
+      let cdcc = document.createElement("div"); 
+      cdcc.classList.add("cdcc")
+      cdcc.innerHTML = `
+      
+        <div class="cdc"> 
+            Confarm <br>
+            <button id="cdelete">cancel</button>
+            <button id="ddelete">delete</button> 
+        </div>
+      `
+      document.body.append(cdcc) 
+      
+      let cdelete = cdcc.querySelector("#cdelete")
+      cdelete.addEventListener("click", () => {
+         let cdcc = document.querySelector(".cdcc").classList.add("remove") 
+      })
+
+      let ddelete = cdcc.querySelector("#ddelete")
+      ddelete.addEventListener("click", () => {
+         ul.remove()
+          document.querySelector(".cdcc").remove()
+      })
+   })  
+   
+
+       
+
+
 
    let task = ul.querySelector(".task")
    let checkboxc = ul.querySelector(".checkbox")
@@ -41,7 +73,7 @@ addButton.addEventListener("click", () => {
          task.disabled = true;
          con.append(completeSectionCon)
          completeSectionCon.querySelector(".completeSection").prepend(ul)
-         
+
 
       } else {
          task.disabled = false;
